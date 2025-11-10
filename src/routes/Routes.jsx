@@ -3,6 +3,9 @@ import Home from "../components/Home";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AddTransaction from "../pages/AddTransaction";
+import MyTransaction from "../pages/MyTransaction";
+import Reports from "../pages/Reports";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,18 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
+      {
+        path: "/addTransaction",
+        element: <AddTransaction></AddTransaction>
+      },
+      {
+        path: "/myTransaction",
+        element: <MyTransaction></MyTransaction>
+      },
+      {
+        path: "/reports",
+        element: <Reports></Reports>
+      }
     ],
   },
   {

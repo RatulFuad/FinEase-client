@@ -34,6 +34,15 @@ const Navbar = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
+              <li>
+                <Link to="/addTransaction">Add Transaction</Link>
+              </li>
+              <li>
+                <Link to="/myTransaction">My Transactions</Link>
+              </li>
+              <li>
+                <Link to="/reports">Reports</Link>
+              </li>
             </ul>
           </div>
           <img className="w-[50px]" src={logo} alt="" />
@@ -44,6 +53,15 @@ const Navbar = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
+            <li>
+              <Link to="/addTransaction">Add Transaction</Link>
+            </li>
+            <li>
+              <Link to="/myTransaction">My Transactions</Link>
+            </li>
+            <li>
+              <Link to="/reports">Reports</Link>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
@@ -52,7 +70,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div>
-          <Link><CgProfile size={25}/></Link>
+          <Link>
+            <CgProfile size={25} />
+          </Link>
         </div>
       </div>
     );
