@@ -3,11 +3,23 @@ import logo from "../assets/images.png"
 import { Link } from "react-router-dom";
 import { AuthContext } from '../provider/AuthProvider';
 import { CgProfile } from "react-icons/cg";
+import { toast } from 'react-toastify';
+
 const Navbar = () => {
-  const {user} = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
+  const handleLogOut=()=>{
+    console.log("logout")
+    logOut().then(() => {
+      // alert("logged out")
+    toast.success("Successfully logged out!");
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
     return (
+      
       <div className="navbar bg-base-100 shadow-sm">
-        <div>{user && user.email}</div>
+        {/* <div>{user && user.email}</div> */}
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -27,6 +39,7 @@ const Navbar = () => {
                 />{" "}
               </svg>
             </div>
+          
             <ul
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
@@ -48,6 +61,7 @@ const Navbar = () => {
           <img className="w-[50px]" src={logo} alt="" />
           <a className="btn btn-ghost text-xl">FinEase</a>
         </div>
+
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
@@ -65,15 +79,39 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to="/Login" className="btn">
+          {user ? (
+            <div className="flex items-center gap-2">
+              <div>
+                <Link>
+                  <CgProfile size={25} />
+                </Link>
+              </div>
+
+              <div>
+                <button onClick={handleLogOut} to="" className="btn">
+                  LogOut
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <Link to="/Login" className="btn">
+                Login
+              </Link>
+            </div>
+          )}
+          {/* <Link to="/Login" className="btn">
             Login
-          </Link>
+          </Link> */}
+          {/* <Link to="" className="btn">
+            LogOut
+          </Link> */}
         </div>
-        <div>
+        {/* <div>
           <Link>
             <CgProfile size={25} />
           </Link>
-        </div>
+        </div> */}
       </div>
     );
 };

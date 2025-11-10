@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
+import { AuthContext } from '../provider/AuthProvider';
+  import { toast } from "react-toastify";
 
 const Login = () => {
+  const {signIn} = use(AuthContext)
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({email, password});
+    signIn(email, password)
+    .then((result) => {
+      const user = result.user;
+      console.log(user)
+      toast.success("Successfully logged In!");
+      
+    })
+    .catch((error)=> {
+      console.log(error)
+    })
+  }
     return (
       <div>
         <div className="flex justify-center items-center mt-20">
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <h2 className="text-5xl font-bold text-center">Login Now</h2>
-            <form  className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <fieldset className="fieldset">
                 {/* email */}
                 <label className="label">Email</label>
@@ -27,6 +47,8 @@ const Login = () => {
                   placeholder="Password"
                   required
                 />
+
+               
 
                 
                 <button className="btn btn-primary mt-5">
