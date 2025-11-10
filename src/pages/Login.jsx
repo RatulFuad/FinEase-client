@@ -4,6 +4,22 @@ import { AuthContext } from '../provider/AuthProvider';
   import { toast } from "react-toastify";
 
 const Login = () => {
+
+   const {signInWithGoogle} = use(AuthContext)
+  
+    const handleGoogleSignIn = ()=>{
+      signInWithGoogle()
+      .then(result => {
+        console.log(result);
+        toast.success("Successfully logged In!");
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  
+    }
+
+
   const {signIn} = use(AuthContext)
   const handleLogin = (e) => {
     e.preventDefault();
@@ -51,7 +67,7 @@ const Login = () => {
                
 
                 
-                <button className="btn btn-primary mt-5">
+                <button   onClick={handleGoogleSignIn} className="btn btn-primary mt-5">
                   {" "}
                   Continue With Google
                 </button>

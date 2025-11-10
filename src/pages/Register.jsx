@@ -1,8 +1,25 @@
 import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../provider/AuthProvider';
+  import { toast } from "react-toastify";
 
 const Register = () => {
+
+  const {signInWithGoogle} = use(AuthContext)
+
+  const handleGoogleSignIn = ()=>{
+    signInWithGoogle()
+    .then(result => {
+      console.log(result);
+      toast.success("Successfully logged In!");
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+  }
+
+
   const { createUser, setUser } = use(AuthContext)
   const handleRegister = (e)=>{
     e.preventDefault();
@@ -67,7 +84,10 @@ const Register = () => {
                   required
                 />
 
-                <button className="btn btn-primary mt-5">
+                <button
+                  onClick={handleGoogleSignIn}
+                  className="btn btn-primary mt-5"
+                >
                   {" "}
                   Continue With Google
                 </button>
