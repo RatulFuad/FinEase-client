@@ -1,15 +1,32 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import { NavLink } from 'react-router';
 
-const Login = () => {
+const Register = () => {
     return (
       <div>
         <div className="flex justify-center items-center mt-20">
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <h2 className="text-5xl font-bold text-center">Login Now</h2>
+            <h2 className="text-5xl font-bold text-center">Register Now</h2>
             <form  className="card-body">
               <fieldset className="fieldset">
-                {/* email */}
+                <label className="label">Name</label>
+                <input
+                  name="name"
+                  type="name"
+                  className="input"
+                  placeholder="Your Name"
+                  required
+                />
+
+                <label className="label">PhotoURL</label>
+                <input
+                  name="photo"
+                  type="text"
+                  className="input"
+                  placeholder="Your Photo"
+                  required
+                />
+
                 <label className="label">Email</label>
                 <input
                   name="email"
@@ -18,7 +35,6 @@ const Login = () => {
                   placeholder="Email"
                   required
                 />
-                {/* password */}
                 <label className="label">Password</label>
                 <input
                   name="password"
@@ -28,19 +44,18 @@ const Login = () => {
                   required
                 />
 
-                
                 <button className="btn btn-primary mt-5">
                   {" "}
-                  Continue With Google
+                   Continue With Google
                 </button>
                 <button type="submit" className="btn btn-neutral mt-4">
-                  Login
+                  Register
                 </button>
               </fieldset>
               <p className="text-center font-bold">
-                Don`t Have an account ?{" "}
-                <NavLink to="/register" className={"text-secondary"}>
-                  Register
+                Already Have an account ?{" "}
+                <NavLink to="/login" className={"text-secondary"}>
+                  Login
                 </NavLink>
               </p>
             </form>
@@ -50,4 +65,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

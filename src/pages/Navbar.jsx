@@ -28,22 +28,24 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Home</a>
+                <Link to="/">Home</Link>
               </li>
             </ul>
           </div>
-          <img className='w-[50px]' src={logo} alt="" />
+          <img className="w-[50px]" src={logo} alt="" />
           <a className="btn btn-ghost text-xl">FinEase</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Home</a>
+              <Link to="/">Home</Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to="/Login" className="btn">Login</Link>
+          <Link to="/Login" className="btn">
+            Login
+          </Link>
         </div>
       </div>
     );
