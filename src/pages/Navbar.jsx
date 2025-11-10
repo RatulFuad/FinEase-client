@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { use } from 'react';
 import logo from "../assets/images.png"
 import { Link } from "react-router-dom";
+import { AuthContext } from '../provider/AuthProvider';
+import { CgProfile } from "react-icons/cg";
 const Navbar = () => {
+  const {user} = use(AuthContext);
     return (
       <div className="navbar bg-base-100 shadow-sm">
+        <div>{user && user.email}</div>
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,6 +50,9 @@ const Navbar = () => {
           <Link to="/Login" className="btn">
             Login
           </Link>
+        </div>
+        <div>
+          <Link><CgProfile size={25}/></Link>
         </div>
       </div>
     );
