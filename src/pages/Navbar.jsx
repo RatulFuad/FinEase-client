@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use } from "react";
 import logo from "../assets/images.png"
 import { Link } from "react-router-dom";
 import { AuthContext } from '../provider/AuthProvider';
@@ -69,8 +69,10 @@ const Navbar = () => {
             <li>
               <Link to="/addTransaction">Add Transaction</Link>
             </li>
-            
-            <li><Link to="/myTransaction">My Transactions</Link></li>
+
+            <li>
+              <Link to="/myTransaction">My Transactions</Link>
+            </li>
             <li>
               <Link to="/reports">Reports</Link>
             </li>
@@ -81,7 +83,13 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <div>
                 <Link to="/profile">
-                  <CgProfile size={25} />
+                 
+                  <img
+                    src={user.photoURL || "https://via.placeholder.com/40"}
+                    alt="profile"
+                    className="w-10 h-10 rounded-full border-2 border-gray-300 object-cover cursor-pointer"
+                    title={user.displayName || "Profile"}
+                  />
                 </Link>
               </div>
 

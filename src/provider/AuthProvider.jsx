@@ -35,7 +35,12 @@ const AuthProvider = ({children}) => {
 
     const signInWithGoogle = ()=>{
         setLoading(true)
-        return signInWithPopup(auth, googleProvider)
+        
+        return signInWithPopup(auth, googleProvider).then((result) => {
+          setUser(result.user); // ✅ এখানে user set করতে হবে
+          return result.user;
+        });
+        
     }
 
     useEffect(()=>{
