@@ -17,7 +17,6 @@ const Navbar = () => {
     });
   }
     return (
-      
       <div className="navbar bg-base-100 shadow-sm">
         {/* <div>{user && user.email}</div> */}
         <div className="navbar-start">
@@ -39,7 +38,7 @@ const Navbar = () => {
                 />{" "}
               </svg>
             </div>
-          
+
             <ul
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
@@ -70,9 +69,8 @@ const Navbar = () => {
             <li>
               <Link to="/addTransaction">Add Transaction</Link>
             </li>
-            <li>
-              <Link to="/myTransaction">My Transactions</Link>
-            </li>
+            
+            <li><Link to="/myTransaction">My Transactions</Link></li>
             <li>
               <Link to="/reports">Reports</Link>
             </li>

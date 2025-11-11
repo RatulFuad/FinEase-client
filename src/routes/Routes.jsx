@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import AddTransaction from "../pages/AddTransaction";
 import MyTransaction from "../pages/MyTransaction";
 import Reports from "../pages/Reports";
+import PrivateRoute from "../provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,16 +27,28 @@ const router = createBrowserRouter([
       },
       {
         path: "/addTransaction",
-        element: <AddTransaction></AddTransaction>
+        element: (
+          <PrivateRoute>
+            <AddTransaction></AddTransaction>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myTransaction",
-        element: <MyTransaction></MyTransaction>
+        element: (
+          <PrivateRoute>
+            <MyTransaction></MyTransaction>,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/reports",
-        element: <Reports></Reports>
-      }
+        element: (
+          <PrivateRoute>
+            <Reports></Reports>,
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
