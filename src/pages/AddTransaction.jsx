@@ -1,35 +1,49 @@
-import React, { useState, useContext } from "react";
+import React, { use } from "react";
 import { AuthContext } from "../provider/AuthProvider"; 
 import { toast } from "react-toastify";
 
 
 const AddTransaction = () => {
-  const {user} = useContext(AuthContext) 
+  const {user} = use(AuthContext) 
 
-  const [formData, setFormData]= useState({
-    type:"Income",
-    category: "",
-    amount: "",
-    description: "",
-    date: "",
-  })
+//   const [formData, setFormData]= useState({
+//     type:"Income",
+//     category: "",
+//     amount: "",
+//     description: "",
+//     date: "",
+//   })
 
-  const handleChange = (e)=>{
-    const {name, value } = e.target;
-    setFormData((prev) =>({ ...prev, [name]: value }))
-  }
+//   const handleChange = (e)=>{
+//     const {name, value } = e.target;
+//     setFormData((prev) =>({ ...prev, [name]: value }))
+//   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const transactionData ={
-      ...formData,
+    const transactionData = {
+      //   ...formData,
+      type: e.target.type.value,
+      category: e.target.category.value,
+      amount: e.target.amount.value,
+      description: e.target.description.value,
+      date: e.target.date.value,
       userEmail: user?.email,
       userName: user?.displayName,
     };
 
-    console.log("Transaction Added", transactionData)
+    // console.log("Transaction Added", transactionData)
     toast.success("Transaction added successfully")
+
+    fetch("http://localhost:3000/FinEase", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: transactionData,
+    })
+    
   };
 
   return (
@@ -44,8 +58,8 @@ const AddTransaction = () => {
           <label className=" font-medium mb-2">Type</label>
           <select
             name="type"
-            value={formData.type}
-            onChange={handleChange}
+            // value={type}
+            // onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-2">
             <option value="Income">Income</option>
             <option value="Expense">Expense</option>
@@ -57,8 +71,8 @@ const AddTransaction = () => {
           <label className=" font-medium mb-2">Category</label>
           <select
             name="category"
-            value={formData.category}
-            onChange={handleChange}
+            // value={category}
+            // onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-2 ">
 
             <option value="">Select category</option>
@@ -79,8 +93,8 @@ const AddTransaction = () => {
           <input
             type="number"
             name="amount"
-            value={formData.amount}
-            onChange={handleChange}
+            // value={amount}
+            // onChange={handleChange}
             placeholder="Enter amount"
             className="w-full border border-gray-300 rounded-lg p-2 "
             required/>
@@ -91,8 +105,8 @@ const AddTransaction = () => {
           <label className=" font-medium mb-2">Description</label>
           <textarea
             name="description"
-            value={formData.description}
-            onChange={handleChange}
+            // value={description}
+            // onChange={handleChange}
             placeholder="Write a short description..."
             className="w-full border border-gray-300 rounded-lg p-2 h-24 "/>
      </div>
@@ -103,8 +117,8 @@ const AddTransaction = () => {
           <input
             type="date"
             name="date"
-            value={formData.date}
-            onChange={handleChange}
+            // value={date}
+            // onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-2 "
             required/>
         </div>
