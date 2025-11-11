@@ -37,7 +37,7 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         
         return signInWithPopup(auth, googleProvider).then((result) => {
-          setUser(result.user); // ✅ এখানে user set করতে হবে
+          setUser(result.user);
           return result.user;
         });
         
