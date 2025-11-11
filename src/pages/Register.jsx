@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../provider/AuthProvider';
   import { toast } from "react-toastify";
 
@@ -7,10 +7,16 @@ const Register = () => {
 
   const {signInWithGoogle} = use(AuthContext)
 
+  const location = useLocation();
+     const navigate = useNavigate()
+     console.log(location)
+
   const handleGoogleSignIn = ()=>{
     signInWithGoogle()
     .then(result => {
       console.log(result);
+      navigate(`${location.state ? location.state : "/"}`);
+
       toast.success("Successfully logged In!");
     })
     .catch(error => {
@@ -30,11 +36,32 @@ const Register = () => {
     const photo = form.photo.value;
     const password = form.password.value;
     console.log({name, email, photo, password})
+
+
+    if (password.length < 6){
+      toast.error("Password must be at least 6 characters long!");
+      return;
+    }
+
+    if (!/[A-Z]/.test(password)){
+   toast.error("Password must contain at least one uppercase letter!");
+      return;
+    }
+
+    if (!/[a-z]/.test(password)){
+      toast.error("Password must contain at least one lowercase letter!");
+      return;
+    }
+
+
+
     createUser(email, password)
     .then((result) =>{
       const user = result.user;
       // console.log(user)
       setUser(user);
+      toast.success("Registration Successful!");
+      form.reset();
     })
     .catch((error)=>{
       const errorcode = error.code;

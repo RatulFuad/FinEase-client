@@ -7,6 +7,7 @@ import AddTransaction from "../pages/AddTransaction";
 import MyTransaction from "../pages/MyTransaction";
 import Reports from "../pages/Reports";
 import PrivateRoute from "../provider/PrivateRoute";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/profile",
+        element: <Profile></Profile>
+      }
     ],
   },
   {

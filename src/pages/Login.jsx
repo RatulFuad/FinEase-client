@@ -1,16 +1,22 @@
-import React, { use } from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../provider/AuthProvider';
   import { toast } from "react-toastify";
 
 const Login = () => {
+  const [error, setError] = useState("")
 
    const {signInWithGoogle} = use(AuthContext)
+   const location = useLocation();
+   const navigate = useNavigate()
+   console.log(location)
   
     const handleGoogleSignIn = ()=>{
       signInWithGoogle()
       .then(result => {
         console.log(result);
+        navigate(`${location.state ? location.state : "/"}`);
+
         toast.success("Successfully logged In!");
       })
       .catch(error => {
@@ -31,10 +37,13 @@ const Login = () => {
     .then((result) => {
       const user = result.user;
       console.log(user)
+      navigate(`${location.state ? location.state : "/"}`)
       toast.success("Successfully logged In!");
       
     })
     .catch((error)=> {
+      const errorCode = error.code;
+      setError(errorCode)
       console.log(error)
     })
   }
@@ -64,7 +73,9 @@ const Login = () => {
                   required
                 />
 
-               
+               {
+                error && <p className='text-red-500 text-xs'>{error}</p>
+               }
 
                 
                 <button   onClick={handleGoogleSignIn} className="btn btn-primary mt-5">

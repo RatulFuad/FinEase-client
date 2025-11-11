@@ -80,7 +80,7 @@ const Navbar = () => {
           {user ? (
             <div className="flex items-center gap-2">
               <div>
-                <Link>
+                <Link to="/profile">
                   <CgProfile size={25} />
                 </Link>
               </div>
