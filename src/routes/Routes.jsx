@@ -8,6 +8,8 @@ import MyTransaction from "../pages/MyTransaction";
 import Reports from "../pages/Reports";
 import PrivateRoute from "../provider/PrivateRoute";
 import Profile from "../pages/Profile";
+import TransactionDetails from "../pages/TransactionDetails";
+import Update from "../pages/Update";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,7 @@ const router = createBrowserRouter([
             <MyTransaction></MyTransaction>,
           </PrivateRoute>
         ),
+        loader: () => fetch("http://localhost:3000/FinEase"),
       },
       {
         path: "/reports",
@@ -52,7 +55,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile></Profile>
+        element: <Profile></Profile>,
+      },
+      {
+        path: "/TransactionDetails/:id",
+        element: <TransactionDetails></TransactionDetails>,
+        loader: ({ params }) => fetch(`http://localhost:3000/FinEase/${params.id}`),
+      },
+      {
+        path: "/update",
+        element: <Update></Update>
       }
     ],
   },

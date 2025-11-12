@@ -41,9 +41,15 @@ const AddTransaction = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: transactionData,
+      body: JSON.stringify(transactionData),
     })
-    
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
