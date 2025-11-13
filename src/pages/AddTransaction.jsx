@@ -3,27 +3,16 @@ import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
 
-const AddTransaction = () => {
+const AddTransaction = ()=>{
   const {user} = use(AuthContext) 
 
-//   const [formData, setFormData]= useState({
-//     type:"Income",
-//     category: "",
-//     amount: "",
-//     description: "",
-//     date: "",
-//   })
 
-//   const handleChange = (e)=>{
-//     const {name, value } = e.target;
-//     setFormData((prev) =>({ ...prev, [name]: value }))
-//   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (e)=>{
+    e.preventDefault()
 
-    const transactionData = {
-      //   ...formData,
+    const transactionData ={
+      
       type: e.target.type.value,
       category: e.target.category.value,
       amount: e.target.amount.value,
@@ -31,12 +20,11 @@ const AddTransaction = () => {
       date: e.target.date.value,
       userEmail: user?.email,
       userName: user?.displayName,
-    };
+    }
 
-    // console.log("Transaction Added", transactionData)
     toast.success("Transaction added successfully")
 
-    fetch("http://localhost:3000/FinEase", {
+    fetch("https://finease-server-phi.vercel.app/FinEase", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,8 +36,8 @@ const AddTransaction = () => {
         console.log(data);
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   };
 
   return (
@@ -64,8 +52,7 @@ const AddTransaction = () => {
           <label className=" font-medium mb-2">Type</label>
           <select
             name="type"
-            // value={type}
-            // onChange={handleChange}
+           
             className="w-full border border-gray-300 rounded-lg p-2">
             <option value="Income">Income</option>
             <option value="Expense">Expense</option>
@@ -75,11 +62,7 @@ const AddTransaction = () => {
        
     <div>
           <label className=" font-medium mb-2">Category</label>
-          <select
-            name="category"
-            // value={category}
-            // onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg p-2 ">
+          <select name="category" className="w-full border border-gray-300 rounded-lg p-2 ">
 
             <option value="">Select category</option>
             <option value="Salary">Salary</option>
@@ -89,68 +72,41 @@ const AddTransaction = () => {
             <option value="Entertainment">Entertainment</option>
             <option value="Shopping">Shopping</option>
             <option value="Other">Other</option>
-         
- </select>
+         </select>
         </div>
 
         
     <div>
           <label className=" font-medium mb-2">Amount</label>
-          <input
-            type="number"
-            name="amount"
-            // value={amount}
-            // onChange={handleChange}
-            placeholder="Enter amount"
-            className="w-full border border-gray-300 rounded-lg p-2 "
-            required/>
+          <input type="number" name="amount" placeholder="Enter amount" className="w-full border border-gray-300 rounded-lg p-2 " required/>
         </div>
 
        
         <div>
           <label className=" font-medium mb-2">Description</label>
-          <textarea
-            name="description"
-            // value={description}
-            // onChange={handleChange}
-            placeholder="Write a short description..."
-            className="w-full border border-gray-300 rounded-lg p-2 h-24 "/>
+          <textarea name="description" placeholder="Write a short description..." className="w-full border border-gray-300 rounded-lg p-2 h-24 "/>
      </div>
 
         
     <div>
           <label className=" font-medium mb-2">Date</label>
-          <input
-            type="date"
-            name="date"
-            // value={date}
-            // onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg p-2 "
-            required/>
+          <input type="date"  name="date" className="w-full border border-gray-300 rounded-lg p-2 " required/>
         </div>
 
        
  <div>
         <label className=" font-medium mb-2">User Email</label>
-          <input
-            type="email"
-            value={user?.email || ""}
-            readOnly
-            className="w-full border border-gray-200 bg-gray-100 rounded-lg p-2 "/>
+          <input type="email" value={user?.email || ""} readOnly  className="w-full border border-gray-200 bg-gray-100 rounded-lg p-2 "/>
         </div>
 
      
     <div>
           <label className=" font-medium mb-2">User Name</label>
-          <input
-            type="text"
-            value={user?.displayName || ""}
-            readOnly
-            className="w-full border border-gray-200 bg-gray-100 rounded-lg p-2 "/>
+          <input type="text" value={user?.displayName || ""} readOnly className="w-full border border-gray-200 bg-gray-100 rounded-lg p-2 "/>
         </div>
 
       
-    <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg ">
+    <button type="submit" className="w-full btn bg-green-700 text-white font-bold py-2 rounded-lg ">
           Add Transaction
         </button>
       </form>

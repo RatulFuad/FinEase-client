@@ -1,16 +1,15 @@
 import React, { use } from "react";
-import logo from "../assets/images.png"
 import { Link } from "react-router-dom";
 import { AuthContext } from '../provider/AuthProvider';
 import { CgProfile } from "react-icons/cg";
 import { toast } from 'react-toastify';
+import logo from "../assets/logologo.png"
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
   const handleLogOut=()=>{
     console.log("logout")
     logOut().then(() => {
-      // alert("logged out")
     toast.success("Successfully logged out!");
     }).catch((error) => {
       console.log(error)
@@ -18,7 +17,6 @@ const Navbar = () => {
   }
     return (
       <div className="navbar bg-base-100 shadow-sm">
-        {/* <div>{user && user.email}</div> */}
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -57,7 +55,8 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <img className="w-[50px]" src={logo} alt="" />
+          {/* <FaMoneyCheckDollar /> */}
+          <img src={logo} alt="" className="w-15" />
           <a className="btn btn-ghost text-xl">FinEase</a>
         </div>
 
@@ -83,7 +82,6 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <div>
                 <Link to="/profile">
-                 
                   <img
                     src={user.photoURL || "https://via.placeholder.com/40"}
                     alt="profile"
@@ -94,30 +92,23 @@ const Navbar = () => {
               </div>
 
               <div>
-                <button onClick={handleLogOut} to="" className="btn">
+                <button
+                  onClick={handleLogOut}
+                  to=""
+                  className="btn btn-neutral"
+                >
                   LogOut
                 </button>
               </div>
             </div>
           ) : (
             <div>
-              <Link to="/Login" className="btn">
+              <Link to="/Login" className="btn  btn-neutral">
                 Login
               </Link>
             </div>
           )}
-          {/* <Link to="/Login" className="btn">
-            Login
-          </Link> */}
-          {/* <Link to="" className="btn">
-            LogOut
-          </Link> */}
         </div>
-        {/* <div>
-          <Link>
-            <CgProfile size={25} />
-          </Link>
-        </div> */}
       </div>
     );
 };

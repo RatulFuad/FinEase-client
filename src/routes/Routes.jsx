@@ -43,7 +43,7 @@ const router = createBrowserRouter([
             <MyTransaction></MyTransaction>,
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:3000/FinEase"),
+        loader: () => fetch("https://finease-server-phi.vercel.app/FinEase"),
       },
       {
         path: "/reports",
@@ -60,12 +60,15 @@ const router = createBrowserRouter([
       {
         path: "/TransactionDetails/:id",
         element: <TransactionDetails></TransactionDetails>,
-        loader: ({ params }) => fetch(`http://localhost:3000/FinEase/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://finease-server-phi.vercel.app/FinEase/${params.id}`),
       },
       {
-        path: "/update",
-        element: <Update></Update>
-      }
+        path: "/update/:id",
+        element: <Update></Update>,
+        loader: ({ params }) =>
+          fetch(`https://finease-server-phi.vercel.app/FinEase/${params.id}`),
+      },
     ],
   },
   {

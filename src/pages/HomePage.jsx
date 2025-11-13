@@ -1,29 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import banner from "../assets/banner.jpg"
 import sec1 from "../assets/sec1.jpg"
 import sec2 from "../assets/sec2.jpg"
 
-const HomePage = () => {
-  const totalBalance = 0;
-  const totalIncome = 0;
-  const totalExpenses = 0;
+const HomePage =() =>{
+  const [transactions, setTransactions] =useState([])
+const [totalIncome, setTotalIncome]= useState(0)
+  const [totalExpenses, setTotalExpenses]= useState(0)
+  const [totalBalance, setTotalBalance]= useState(0)
+
+  
+  useEffect(()=>{
+    fetch("https://finease-server-phi.vercel.app/FinEase")
+      .then((res)=> res.json())
+      .then((data) =>{
+    setTransactions(data)
+
+      
+        const income =data
+          .filter((item)=> item.type === "Income")
+          .reduce((sum, item)=> sum + Number(item.amount), 0)
+
+        const expenses = data
+          .filter((item)=> item.type === "Expense")
+          .reduce((sum, item)=> sum + Number(item.amount), 0);
+
+
+        setTotalIncome(income)
+        setTotalExpenses(expenses)
+        setTotalBalance(income - expenses)
+      })
+      .catch((err) => console.error("Error loading data:", err))
+  }, []);
 
   return (
     <div className="font-sans p-5">
-      {/* <section>
-        <img src={banner} alt="" className="w-full h-[400px] rounded-2xl mb-5" />
-      </section> */}
-
       <section className="relative">
-        {/* Banner Image */}
         <img
           src={banner}
           alt="Banner"
           className="w-full h-[400px] rounded-2xl mb-5 object-cover"
         />
 
-        {/* Text Overlay */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-black  bg-opacity-30 rounded-2xl">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-black  rounded-2xl">
           <h1 className="text-4xl font-bold mb-2 text-center">
             Manage Your Finances Smartly
           </h1>
@@ -33,45 +52,60 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ওভারভিউ সেকশন */}
       <section className="flex justify-around mb-8">
-        <div className="bg-[#e0f7fa] p-5 rounded-lg w-1/4 text-center font-bold text-xl">
+        <div className="bg-[#e0f7fa] p-5 rounded-lg w-1/4 text-center font-bold text-xl shadow-md">
           <h2>Total Balance</h2>
-          <p className="text-2xl font-bold">{totalBalance}</p>
+          <p className="text-3xl font-extrabold text-gray-800">
+            {totalBalance}
+          </p>
         </div>
-        <div className="bg-[#e8f5e9] p-5 rounded-lg w-1/4 text-center font-bold text-xl">
+        <div className="bg-[#e8f5e9] p-5 rounded-lg w-1/4 text-center font-bold text-xl shadow-md">
           <h2>Total Income</h2>
-          <p className="text-2xl font-bold">{totalIncome}</p>
+          <p className="text-3xl font-extrabold text-green-700">
+            {totalIncome}
+          </p>
         </div>
-        <div className="bg-[#ffebee] p-5 rounded-lg w-1/4 text-center font-bold text-xl">
+        <div className="bg-[#ffebee] p-5 rounded-lg w-1/4 text-center font-bold text-xl shadow-md">
           <h2>Total Expenses</h2>
-          <p className="text-2xl font-bold">{totalExpenses}</p>
+          <p className="text-3xl font-extrabold text-red-700">
+            {totalExpenses}
+          </p>
         </div>
       </section>
 
-      <div className="flex gap-5 ">
-        {/* স্ট্যাটিক সেকশন ১ */}
-        <section className="relative">
-          <img src={sec1} alt="" className="rounded-2xl" />
+    
 
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-black  bg-opacity-30 rounded-2xl">
-            <p className="text-2xl text-center font-bold ">
-              <li>Track your monthly expenses carefully.</li>
-              <li>Set realistic financial goals for savings.</li>
-              <li>Review your spending habits regularly.</li>
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10 px-4 lg:px-12">
+        
+        <section className="relative group overflow-hidden rounded-2xl shadow-lg">
+          <img src={sec1} alt="Financial Tips" className="w-full h-[300px] object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105" />
+
+  
+          <div className="absolute inset-0 bg-black/20   flex flex-col justify-center items-center rounded-2xl p-6">
+            <ul className="text-white text-lg md:text-xl font-semibold space-y-3 text-center leading-relaxed">
+              <li>💰 Track your monthly expenses carefully</li>
+              <li>🎯 Set realistic financial goals for savings</li>
+              <li>📊 Review your spending habits regularly</li>
+            </ul>
           </div>
         </section>
 
-        {/* স্ট্যাটিক সেকশন ২ */}
-        <section className="relative">
-          <img src={sec2} alt="" className="rounded-2xl" />
+      
+        <section className="relative group overflow-hidden rounded-2xl shadow-lg">
+          <img src={sec2} alt="Financial Planning" className="w-full h-[300px] object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105" />
 
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-black  bg-opacity-30 rounded-2xl">
-            <p className="text-2xl text-center font-bold ">
-              Financial planning helps you prepare for the future, <br /> reduce
-              stress related to money, and ensure that you can achieve your life
-              goals efficiently. Start planning today for a secure tomorrow.
+         
+        <div className="absolute inset-0 flex flex-col justify-center items-center rounded-2xl p-6">
+            <p className="text-white text-lg md:text-xl font-semibold text-center leading-relaxed">
+              Financial planning helps you prepare for the future,
+              <br />
+              reduce money stress, and ensure that you can
+              <br />
+              achieve your life goals efficiently.
+              <br />
+              <span className="text-yellow-300 font-bold">
+                Start planning today for a secure tomorrow!
+              </span>
             </p>
           </div>
         </section>
@@ -92,16 +126,3 @@ export default HomePage;
 
 
 
-//  <ul>
-//    <li>Track your monthly expenses carefully.</li>
-//    <li>Set realistic financial goals for savings.</li>
-//    <li>Review your spending habits regularly.</li>
-//  </ul>;
-
-
-
-//  <p>
-//    Financial planning helps you prepare for the future, reduce stress related to
-//    money, and ensure that you can achieve your life goals efficiently. Start
-//    planning today for a secure tomorrow.
-//  </p>;
